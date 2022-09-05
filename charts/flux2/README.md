@@ -1,6 +1,6 @@
 # flux2
 
-![Version: 1.2.0](https://img.shields.io/badge/Version-1.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.33.0](https://img.shields.io/badge/AppVersion-0.33.0-informational?style=flat-square)
+![Version: 1.2.2](https://img.shields.io/badge/Version-1.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.33.0](https://img.shields.io/badge/AppVersion-0.33.0-informational?style=flat-square)
 
 A Helm chart for flux2
 
@@ -19,7 +19,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | cli.nodeSelector | object | `{}` |  |
 | cli.tag | string | `"v0.33.0"` |  |
 | cli.tolerations | list | `[]` |  |
-| eventsaddr | string | `"http://notification-controller/"` | Maybe you need to use full domain name here, if you deploy flux in environments that use http proxy.  In such environments they normally add `.cluster.local` and `.local` suffixes to `no_proxy` variable in order to prevent cluster-local traffic from going through http proxy. Without fully specified domain they need to mention `notifications-controller` explicitly in `no_proxy` variable after debugging http proxy logs eg: http://notification-controller.[NAMESPACE].svc.[CLUSTERDOMAIN] |
+| eventsaddr | string | `"http://notification-controller/"` | Maybe you need to use full domain name here, if you deploy flux in environments that use http proxy. In such environments they normally add `.cluster.local` and `.local` suffixes to `no_proxy` variable in order to prevent cluster-local traffic from going through http proxy. Without fully specified domain they need to mention `notifications-controller` explicitly in `no_proxy` variable after debugging http proxy logs eg: http://notification-controller.[NAMESPACE].svc.[CLUSTERDOMAIN] |
 | extraObjects | list | `[]` | Array of extra K8s manifests to deploy |
 | helmcontroller.affinity | object | `{}` |  |
 | helmcontroller.annotations."prometheus.io/port" | string | `"8080"` |  |
@@ -91,6 +91,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | loglevel | string | `"info"` |  |
 | multitenancy.defaultServiceAccount | string | `"default"` | All Kustomizations and HelmReleases which don’t have spec.serviceAccountName specified, will use the default account from the tenant’s namespace. Tenants have to specify a service account in their Flux resources to be able to deploy workloads in their namespaces as the default account has no permissions. |
 | multitenancy.enabled | bool | `false` | Implement the patches for Multi-tenancy lockdown. See https://fluxcd.io/docs/installation/#multi-tenancy-lockdown |
+| multitenancy.privileged | bool | `true` | Both kustomize-controller and helm-controller service accounts run privileged with cluster-admin ClusterRoleBinding. Disable if you want to run them with a minimum set of permissions. |
 | notificationcontroller.affinity | object | `{}` |  |
 | notificationcontroller.annotations."prometheus.io/port" | string | `"8080"` |  |
 | notificationcontroller.annotations."prometheus.io/scrape" | string | `"true"` |  |
